@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 
 def get_activation_List():
-    print('All activation functions\n__________________\nsigmoid\ntanh\nsoftmax\nlinear\nswish')
+    print('All activation functions\n__________________\nsigmoid\ntanh\nsoftmax\nlinear')
 
 
 class Neural_Network(object):
@@ -32,9 +32,6 @@ class Neural_Network(object):
 
         if self.activation_function == 'linear':
             return self.step * x
-
-        if self.activation_function == 'swish':
-            return x / (1 - np.exp(-x))
 
     def activation_der(self, x):
         return self.activation(x) * (1 - self.activation(x))
@@ -72,11 +69,10 @@ class Neural_Network(object):
         result = self.activation(np.dot(self.data, self.weights) + self.bias)
 
         for i, point in enumerate(result):
-            print(f'Result {i + 1} Prediction: ', np.round(point, 3), ' | ', f'Result {i + 1} Actual: ', self.labels[i])
+            print(f'Result {i + 1} | Prediction:  {np.round(point, 3)} | Training data: {self.data[i]}  |  Actual: {self.labels[i]} | Cost: {np.round(self.cost[i], 3)}')
             if point > 0.5 and self.labels[i] == 1 or point < 0.5 and self.labels[i] == 0:
                 acc += 1
-        print('Accuracy: ', acc / len(result))
-        print('Cost: ', '\n',np.round(self.cost,3))
+        print('Accuracy: ', (acc / len(result) * 100), '%')
 
         if plot:
             plt.scatter(result, self.labels)
@@ -90,15 +86,15 @@ if __name__ == '__main__':
     labels = np.array([[1, 0, 0, 1, 1]])
     nn_sig = Neural_Network(model_name='Sigmoid', data=data, labels=labels, step=0.5, activation_function='sigmoid')
     nn_tanh = Neural_Network(model_name='tanh', data=data, labels=labels, step=0.5, activation_function='tanh')
-    nn_softmax = Neural_Network(model_name='softmax', data=data, labels=labels, step=0.5, activation_function='softmax')
+    nn_softmax = Neural_Network(model_name='softmax', data=data, labels=labels, step=0.1, activation_function='softmax')
     nn_linear = Neural_Network(model_name='linear', data=data, labels=labels, step=0.5, activation_function='linear')
-    nn_sig.train(iterations=100, cost_visual=False)
-    nn_sig.predict(plot=False)
-    nn_tanh.train(iterations=100, cost_visual=False)
-    nn_tanh.predict(plot=False)
-    nn_linear.train(iterations=100, cost_visual=False)
-    nn_linear.predict(plot=False)
-    nn_softmax.train(iterations=100, cost_visual=False)
-    nn_softmax.predict(plot=False)
 
+    nn_sig.train(iterations=20000, cost_visual=False)
+    nn_sig.predict(plot=False)
+    nn_tanh.train(iterations=20000, cost_visual=False)
+    nn_tanh.predict(plot=False)
+    nn_linear.train(iterations=20000, cost_visual=False)
+    nn_linear.predict(plot=False)
+    nn_softmax.train(iterations=20000, cost_visual=False)
+    nn_softmax.predict(plot=False)
 
