@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 
 def get_activation_List():
-    print('All activation functions\n__________________\nsigmoid\ntanh\nsoftmaxr\nlinear\nswish')
+    print('All activation functions\n__________________\nsigmoid\ntanh\nsoftmax\nlinear\nswish')
 
 
 class Neural_Network(object):
