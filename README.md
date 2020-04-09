@@ -1,2 +1,2 @@
 # Neural-Network-from-scratch
-Neural Network from scratch using python, and numpy
+A simple 3 layer(input, hidden, output) neural network coded without ML libraries
